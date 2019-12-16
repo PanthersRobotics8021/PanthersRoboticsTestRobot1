@@ -45,6 +45,8 @@ public class GTADrive extends Command {
     }
     
     if (turnValue < 0 || turnValue > 0) {
+      lMotors *= RobotMap.MOTOR_SPEED_FACTOR;
+      rMotors *= RobotMap.MOTOR_SPEED_FACTOR;
       lMotors -= turnValue * RobotMap.MOTOR_SPEED_FACTOR;
       rMotors += turnValue * RobotMap.MOTOR_SPEED_FACTOR;
     }
