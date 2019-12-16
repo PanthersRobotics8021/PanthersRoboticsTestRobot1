@@ -40,7 +40,7 @@ public class GTADrive extends Command {
     if (joyX > 1 + RobotMap.TURN_THRESHOLD || joyX < 1 - RobotMap.TURN_THRESHOLD) {
       turnValue = joyZ + joyX;
     }
-    else if (joyX > .9 && joyX < 1.1) {
+    else if (joyX < 1 + RobotMap.TURN_THRESHOLD || joyX < 1 - RobotMap.TURN_THRESHOLD) {
       turnValue = joyZ;
     }
     
