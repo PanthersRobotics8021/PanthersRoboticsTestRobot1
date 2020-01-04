@@ -33,7 +33,7 @@ public class GTADrive extends Command {
     double joyY = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_Y);
     double joyZ = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_Z);
     double joySlider = 1 - Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_SLIDE);
-    boolean thumbButton = Robot.m_oi.GetThumbButton(RobotMap.THUMB_BUTTON);
+    boolean thumbButton = Robot.m_oi.GetButton(RobotMap.THUMB_BUTTON);
 
     double turnValue;
     double lMotors = joyY; 

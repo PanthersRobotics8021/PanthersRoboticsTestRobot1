@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
-
+import frc.robot.commands.InputDrive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,16 +21,18 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 
   Joystick driverController = new  Joystick(RobotMap.DRIVER_CONTROLLER);
+  Button trigger = new JoystickButton(driverController, RobotMap.TRIGGER);
 
   public double GetDriverRawAxis(int axis){
     return driverController.getRawAxis(axis);
   }
 
-  public boolean GetThumbButton(int button){
+  public boolean GetButton(int button){
     return driverController.getRawButtonPressed(button);
   }
 
   public OI() {
+    trigger.whenPressed(new InputDrive(1,.5,-.5));
   }
 
   //// CREATING BUTTONS
