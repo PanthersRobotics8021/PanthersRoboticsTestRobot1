@@ -9,8 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.JoystickBase;
 
 
 /**
@@ -25,7 +26,12 @@ public class OI {
     return driverController.getRawAxis(axis);
   }
 
-  
+  public boolean GetThumbButton(int button){
+    return driverController.getRawButtonPressed(button);
+  }
+
+  public OI() {
+  }
 
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

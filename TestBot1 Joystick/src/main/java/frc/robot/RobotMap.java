@@ -27,11 +27,23 @@ public class RobotMap {
   public static final int JOY_Y = 1;
   public static final int JOY_Z = 2;
   public static final int JOY_SLIDE = 3;
+  public static final int TRIGGER = 1;
+  public static final int THUMB_BUTTON = 2;
+  public static final int TOP_DOWN_LEFT = 3;
+  public static final int TOP_DOWN_RIGHT = 4;
+  public static final int TOP_UP_LEFT = 5;
+  public static final int TOP_UP_RIGHT = 6;
+  public static final int PAD_A1 = 7;
+  public static final int PAD_A2 = 8;
+  public static final int PAD_B1 = 9;
+  public static final int PAD_B2 = 10;
+  public static final int PAD_C1 = 11;
+  public static final int PAD_C2 = 12;
   
   //motor variables
   public static final double MOTOR_SPEED_FACTOR = .5;
   public static final double MOTOR_THRESHOLD = .05;
-  public static final double TURN_THRESHOLD = .2;
+  public static final double TURN_THRESHOLD = .3;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

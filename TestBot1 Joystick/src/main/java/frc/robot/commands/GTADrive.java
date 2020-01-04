@@ -28,15 +28,18 @@ public class GTADrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //variables
     double joyX = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_X);
     double joyY = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_Y);
     double joyZ = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_Z);
     double joySlider = 1 - Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_SLIDE);
-    double turnValue = joyZ;
+    boolean thumbButton = Robot.m_oi.GetThumbButton(RobotMap.THUMB_BUTTON);
 
+    double turnValue;
     double lMotors = joyY; 
     double rMotors = joyY;
 
+    //joystick x turning threshold
     if (joyX > 1 + RobotMap.TURN_THRESHOLD || joyX < 1 - RobotMap.TURN_THRESHOLD) {
       turnValue = joyZ + joyX;
     }
@@ -44,6 +47,8 @@ public class GTADrive extends Command {
       turnValue = joyZ;
     }
     
+
+    //turning values
     if (turnValue < 0 || turnValue > 0) {
       lMotors *= RobotMap.MOTOR_SPEED_FACTOR;
       rMotors *= RobotMap.MOTOR_SPEED_FACTOR;
@@ -55,8 +60,11 @@ public class GTADrive extends Command {
       rMotors *= RobotMap.MOTOR_SPEED_FACTOR;
     }
 
+
+    //final command
     Robot.driveTrain.setLeftMotors(lMotors * joySlider);
     Robot.driveTrain.setRightMotors(rMotors * joySlider);
+    Robot.driveTrain.invertMotors(thumbButton);
   }
 
   // Make this return true when this Command no longer needs to run execute()
