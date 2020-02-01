@@ -11,17 +11,23 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.InputDrive;
+import com.revrobotics.ColorSensorV3;
+
+import org.w3c.dom.css.RGBColor;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
+  //joystick
   Joystick driverController = new  Joystick(RobotMap.DRIVER_CONTROLLER);
   Button trigger = new JoystickButton(driverController, RobotMap.TRIGGER);
+  POVButton hatleft = new POVButton(driverController, 270);
+  POVButton hatright = new POVButton(driverController, 90);
 
   public double GetDriverRawAxis(int axis){
     return driverController.getRawAxis(axis);
@@ -32,7 +38,8 @@ public class OI {
   }
 
   public OI() {
-    trigger.whenPressed(new InputDrive(1,.5,-.5));
+    hatright.whenPressed(new InputDrive(.5, -.3, .3));
+    hatleft.whenPressed(new InputDrive(.5, .3, -.3));
   }
 
   //// CREATING BUTTONS

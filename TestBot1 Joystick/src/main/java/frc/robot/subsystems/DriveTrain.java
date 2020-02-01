@@ -11,9 +11,11 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.GTADrive;
 //import frc.robot.commands.TankDrive;
+import frc.robot.commands.InputDrive;
 
 /**
  * Add your docs here.
@@ -32,26 +34,14 @@ public class DriveTrain extends Subsystem {
    setDefaultCommand(new GTADrive());
   }
 
-  private boolean reverse = false;
-
   public void setLeftMotors(double speed) {
     motorLeft1.set(ControlMode.PercentOutput, -speed);
     motorLeft2.set(ControlMode.PercentOutput, -speed);
-    motorLeft1.setInverted(reverse);
-    motorLeft2.setInverted(reverse);
   }
 
   public void setRightMotors(double speed) {
     motorRight1.set(ControlMode.PercentOutput, speed);
     motorRight2.set(ControlMode.PercentOutput, speed);
-    motorRight1.setInverted(reverse);
-    motorRight2.setInverted(reverse);
-  }
-
-  public void invertMotors(boolean invert) {
-    if (invert) {
-      reverse = !reverse;
-    }
   }
 
 }

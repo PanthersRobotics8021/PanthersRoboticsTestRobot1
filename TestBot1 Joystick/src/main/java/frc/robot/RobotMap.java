@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -20,6 +22,9 @@ public class RobotMap {
 	public static final int MOTOR_LEFT_2_ID = 3;
 	public static final int MOTOR_RIGHT_1_ID = 4;
   public static final int MOTOR_RIGHT_2_ID = 5;
+
+  //color sensor id
+  public static final I2C.Port i2c_PORT = I2C.Port.kOnboard;
   
   //controller ids
   public static final int DRIVER_CONTROLLER = 0;
@@ -41,9 +46,9 @@ public class RobotMap {
   public static final int PAD_C2 = 12;
   
   //motor variables
-  public static final double MOTOR_SPEED_FACTOR = .5;
+  public static final double MOTOR_SPEED_FACTOR = 1;
   public static final double MOTOR_THRESHOLD = .05;
-  public static final double TURN_THRESHOLD = .3;
+  public static final double TURN_THRESHOLD = .25;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

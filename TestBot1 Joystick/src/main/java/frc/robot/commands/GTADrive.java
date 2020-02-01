@@ -23,7 +23,10 @@ public class GTADrive extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
   }
+
+  boolean reverse = false;
 
   // Called repeatedly when this Command is scheduled to run
   @Override
@@ -32,24 +35,40 @@ public class GTADrive extends Command {
     double joyX = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_X);
     double joyY = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_Y);
     double joyZ = Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_Z);
-    double joySlider = 1 - Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_SLIDE);
+    double throttle = 1 - Robot.m_oi.GetDriverRawAxis(RobotMap.JOY_SLIDE);
     boolean thumbButton = Robot.m_oi.GetButton(RobotMap.THUMB_BUTTON);
 
-    double turnValue;
+
+    //motor variables
+    double turnValue = 0;
     double lMotors = joyY; 
     double rMotors = joyY;
 
-    //joystick x turning threshold
-    if (joyX > 1 + RobotMap.TURN_THRESHOLD || joyX < 1 - RobotMap.TURN_THRESHOLD) {
-      turnValue = joyZ + joyX;
+
+    //reverse system
+    if (thumbButton) {
+      reverse = !reverse;
     }
-    else {
-      turnValue = joyZ;
+
+    if (reverse) {
+      lMotors = -lMotors;
+      rMotors = -rMotors;
     }
-    
+
+
+    //turn system
+    if (joyX > RobotMap.TURN_THRESHOLD || joyX < -RobotMap.TURN_THRESHOLD) {
+      turnValue += joyX;
+    }
+
+    if (joyZ > RobotMap.TURN_THRESHOLD || joyZ < -RobotMap.TURN_THRESHOLD) {
+      turnValue += joyZ;
+    }
+
 
     //turning values
     if (turnValue < 0 || turnValue > 0) {
+      turnValue *= .6;
       lMotors *= RobotMap.MOTOR_SPEED_FACTOR;
       rMotors *= RobotMap.MOTOR_SPEED_FACTOR;
       lMotors -= turnValue * RobotMap.MOTOR_SPEED_FACTOR;
@@ -60,11 +79,9 @@ public class GTADrive extends Command {
       rMotors *= RobotMap.MOTOR_SPEED_FACTOR;
     }
 
-
     //final command
-    Robot.driveTrain.setLeftMotors(lMotors * joySlider);
-    Robot.driveTrain.setRightMotors(rMotors * joySlider);
-    Robot.driveTrain.invertMotors(thumbButton);
+    Robot.driveTrain.setLeftMotors(lMotors * throttle);
+    Robot.driveTrain.setRightMotors(rMotors * throttle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
